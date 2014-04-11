@@ -1,6 +1,7 @@
 package junior.gitcommit;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -23,7 +24,9 @@ public class GitRepositoryStateHelper {
     public GitRepositoryState gitGitRepositoryState() throws IOException {
         if (gitRepositoryState == null) {
             Properties properties = new Properties();
-            properties.load(getClass().getClassLoader().getResourceAsStream("git.properties"));
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("git.properties");
+            properties.load(inputStream);
+            inputStream.close();
 
             gitRepositoryState = new GitRepositoryState(properties);
         }
